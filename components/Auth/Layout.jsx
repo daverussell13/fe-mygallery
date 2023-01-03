@@ -1,5 +1,5 @@
 import styles from "./Styles/Layout.module.css";
 
 export default function Layout({ children }) {
-  return <main className={styles.main}>{children}</main>;
+  return <div className={styles.auth_layout}>{children}</div>;
 }

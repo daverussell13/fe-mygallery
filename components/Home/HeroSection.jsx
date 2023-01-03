@@ -1,3 +1,3 @@
-import styles from "./HeroSection.module.css";
+import styles from "./Styles/HeroSection.module.css";
 
 export default function HeroSection() {}
