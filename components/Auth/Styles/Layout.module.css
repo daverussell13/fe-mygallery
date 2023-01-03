@@ -1,0 +1,8 @@
+.main {
+  max-width: 1366px;
+  min-height: calc(100vh - 84px);
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  color: black;
+}
