@@ -49,9 +49,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
   font-size: 1.1em;
   font-weight: 700;
+  color: black;
+}
+
+.nav_collapse div {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: black;
 }
 
 .collapse {
