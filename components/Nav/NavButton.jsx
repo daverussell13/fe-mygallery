@@ -1,8 +1,9 @@
+import Link from "next/link";
 import styles from "./Styles/style.module.css";
 
 export default function NavButton({ url, background, color, children }) {
   return (
-    <a
+    <Link
       href={url}
       style={{
         background: background ? background : "inherit",
@@ -11,6 +12,6 @@ export default function NavButton({ url, background, color, children }) {
       className={styles.nav_button}
     >
       {children}
-    </a>
+    </Link>
   );
 }
