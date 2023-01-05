@@ -1,10 +1,17 @@
 .form_container {
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   padding: 30px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .form_title {
@@ -31,6 +38,7 @@
   border-radius: 3px;
   color: #000000;
   font-size: 1.125em;
+  outline: none;
 }
 
 .form_input_container input::placeholder {
@@ -45,16 +53,27 @@
 
 .register_link a {
   text-decoration: underline;
-  color: #82aae3;
+  color: var(--primary-color);
 }
 
 .submit_login_button {
+  border: none;
   text-align: center;
   font-weight: 700;
   font-size: 1.5em;
   color: #fefefe;
   padding: 12px 42px;
   width: 17em;
-  background-color: #82aae3;
+  background-color: var(--primary-color);
   cursor: pointer;
+}
+
+.submit_login_button:active {
+  background-color: var(--primary-alt);
+}
+
+@media screen and (min-height: 700px) {
+  .form_container {
+    font-size: 16px;
+  }
 }

@@ -5,7 +5,13 @@ export default function Banner() {
   return (
     <div className={styles.banner_section}>
       <div className={styles.banner_container}>
-        <Image src="/Assets/securelogin.png" alt="banner" fill></Image>
+        <Image
+          src="/Assets/securelogin.png"
+          alt="banner"
+          fill
+          sizes="contain"
+          priority
+        ></Image>
       </div>
     </div>
   );
