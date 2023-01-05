@@ -1,0 +1,40 @@
+.back_button {
+  color: #82aae3;
+  text-decoration: underline !important;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.memory_title {
+  margin: auto;
+  font-size: 1.25em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.memory_image_container {
+  position: relative;
+  aspect-ratio: 5/2;
+}
+
+.detail_footer {
+  gap: 3em;
+}
+
+@media screen and (max-width: 767.98px) {
+  .container {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .container {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    font-size: 10px;
+  }
+}

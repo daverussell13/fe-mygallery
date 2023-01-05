@@ -1,0 +1,15 @@
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12em;
+  height: 3em;
+  background: #204f91;
+  border-radius: 13;
+}
+
+.badge span {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 700;
+}
