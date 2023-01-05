@@ -23,7 +23,7 @@ export default function LoggedHeader() {
       </header>
       <div className={styles.nav_collapse} ref={navRef}>
         <div>Mr. Fajar</div>
-        <Link href="/">Beranda</Link>
+        <Link href="/logout">Logout</Link>
       </div>
     </>
   );
