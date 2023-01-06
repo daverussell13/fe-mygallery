@@ -13,7 +13,10 @@ export default function GalleryCard({ key, date, tag, imageUrl }) {
             loader={() => src}
             src={src}
             alt="memory.png"
-            style={{ objectFit: "contain", background: "rgba(245,245,245,.8)" }}
+            style={{
+              objectFit: "contain",
+              background: "#f4f4f4",
+            }}
           ></Image>
         </div>
         <div className={styles.card_body}>

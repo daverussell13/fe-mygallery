@@ -2,13 +2,15 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "../Auth/Styles/LoginForm.module.css";
 import { toast } from "react-toastify";
 import Router from "next/router";
 import { clearUserData, getUserData, getUserToken } from "../../helper/auth";
+import { MemoryContext } from "../../context/MemoryContextProvider";
 
 export default function AddMemoryFormModal({ show, setShow }) {
+  const { memories, setMemories } = useContext(MemoryContext);
   const [imageUrl, setImageUrl] = useState("");
   const [fileInput, setFileInput] = useState(null);
   const [progress, setProgress] = useState(false);
@@ -54,6 +56,7 @@ export default function AddMemoryFormModal({ show, setShow }) {
       const resJson = await res.json();
 
       if (status == 200) {
+        setMemories([...memories, resJson.data]);
         toast.success(resJson.message);
       } else if (status == 403) {
         toast.error("Invalid User Credentials! ⛔");

@@ -8,8 +8,42 @@ import { toast } from "react-toastify";
 import Router from "next/router";
 
 export default function GalleryGridContainer() {
-  const { memories, setMemories } = useContext(MemoryContext);
+  const { memories, setMemories, count } = useContext(MemoryContext);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchMemories() {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/memories`,
+          getJsonWithCreds()
+        );
+
+        const status = res.status;
+        const resJson = await res.json();
+
+        if (status == 200) {
+          setMemories(resJson.data);
+        } else if (status >= 400 && status <= 499) {
+          toast.error("Unable to fetch memories 💀");
+          toast.info("Please relogin ⚠️");
+          clearUserData();
+          Router.replace("/login");
+        } else if (status >= 500 && status <= 599) {
+          toast.error("Something went wrong 😕");
+          clearUserData();
+          Router.replace("/login");
+        }
+      } catch (err) {
+        toast.error("Something went wrong 😕");
+        clearUserData();
+        Router.replace("/login");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMemories();
+  }, [setMemories]);
 
   useEffect(() => {
     async function fetchMemories() {
