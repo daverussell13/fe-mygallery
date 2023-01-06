@@ -1,7 +1,7 @@
 import styles from "./Styles/GalleryCard.module.css";
 import Image from "next/image";
 
-export default function GalleryCard() {
+export default function GalleryCard({}) {
   return (
     <div className="col d-flex justify-content-center align-items-center">
       <div className={styles.card_container}>

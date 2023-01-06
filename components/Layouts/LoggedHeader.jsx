@@ -6,17 +6,8 @@ import Hamburger from "../Nav/Hamburger";
 import LogoutButton from "../Nav/LogoutButton";
 import Router from "next/router";
 
-export default function LoggedHeader() {
+export default function LoggedHeader({ email }) {
   const navRef = useRef();
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (localStorage.getItem("email")) {
-      setUsername(localStorage.getItem("email"));
-    } else {
-      Router.replace("/login");
-    }
-  }, []);
 
   function removeToken() {
     localStorage.removeItem("token");
@@ -29,14 +20,14 @@ export default function LoggedHeader() {
         <div className={styles.wrapper}>
           <div className={styles.logo}>MyGallery.</div>
           <div className={styles.nav_container}>
-            <Username name={username} />
+            <Username name={email} />
             <LogoutButton />
           </div>
           <Hamburger navRef={navRef} />
         </div>
       </header>
       <div className={styles.nav_collapse} ref={navRef}>
-        <div>{username}</div>
+        <div>{email}</div>
         <div style={{ cursor: "pointer" }} onClick={removeToken}>
           Logout
         </div>

@@ -9,8 +9,8 @@ export default function Banner() {
           src="/Assets/securelogin.png"
           alt="banner"
           fill
-          sizes="contain"
-          priority
+          sizes="100%"
+          priority="true"
         ></Image>
       </div>
     </div>

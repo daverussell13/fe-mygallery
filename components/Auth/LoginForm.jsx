@@ -4,11 +4,9 @@ import { postJsonOpt } from "../../helper/options";
 import { toast } from "react-toastify";
 import Router from "next/router";
 import styles from "./Styles/LoginForm.module.css";
-import { AppContext } from "../../context/AppContextProvider";
 
 export default function LoginForm() {
   const [progress, setProgress] = useState(false);
-  const { setLogged } = useContext(AppContext);
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -30,11 +28,13 @@ export default function LoginForm() {
         toast.success(`Successfully logged in 👌!`);
         const userData = resData.data;
 
-        localStorage.setItem("email", userData.email);
-        localStorage.setItem("UID", userData.userID);
-        localStorage.setItem("token", userData.token);
+        const userCreds = {
+          email: userData.email,
+          userID: userData.userID,
+        };
 
-        setLogged(true);
+        localStorage.setItem("User-Creds", JSON.stringify(userCreds));
+        localStorage.setItem("token", userData.token);
 
         Router.replace("/gallery");
       } else {
