@@ -7,6 +7,14 @@
   cursor: pointer;
 }
 
+.logout_button {
+  background-color: #677486;
+}
+
+.logout_button:active {
+  background-color: #49525f;
+}
+
 .hamburger {
   display: none;
   cursor: pointer;

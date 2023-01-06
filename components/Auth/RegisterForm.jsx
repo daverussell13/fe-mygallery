@@ -28,8 +28,7 @@ export default function RegisterForm() {
       let message = "";
 
       if (success) {
-        message =
-          resData.success[0].toUpperCase() + resData.success.substring(1);
+        message = resData.status[0].toUpperCase() + resData.status.substring(1);
         toast.success(`${message} 👌!`);
       } else {
         message =
@@ -54,8 +53,9 @@ export default function RegisterForm() {
           {progress && <div className={styles.overlay}></div>}
           <h1 className={styles.form_title}>Register</h1>
           <div className={styles.form_input_container}>
-            <label htmlFor="">Name</label>
+            <label htmlFor="fullname">Name</label>
             <input
+              id="fullname"
               type="text"
               placeholder="Fullname..."
               name="fullname"
@@ -63,12 +63,19 @@ export default function RegisterForm() {
             />
           </div>
           <div className={styles.form_input_container}>
-            <label htmlFor="">Email</label>
-            <input type="text" placeholder="Email..." name="email" required />
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Email..."
+              name="email"
+              required
+            />
           </div>
           <div className={styles.form_input_container}>
-            <label htmlFor="">Password</label>
+            <label htmlFor="password">Password</label>
             <input
+              id="password"
               type="password"
               placeholder="Password..."
               name="password"

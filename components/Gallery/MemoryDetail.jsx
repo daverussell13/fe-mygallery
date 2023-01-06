@@ -4,8 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import TagBadge from "./TagBadge";
 import UpdateButton from "./MemoryUpdateButton";
+import { useEffect } from "react";
 
 export default function MemoryDetail() {
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      Router.replace("/login");
+    }
+  }, []);
+
   return (
     <div className={`container my-4 ${styles.container}`}>
       <div className="row justify-content-center">

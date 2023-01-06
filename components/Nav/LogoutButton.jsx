@@ -1,9 +1,18 @@
-import NavButton from "./NavButton";
+import styles from "./Styles/style.module.css";
+import Router from "next/router";
 
 export default function LogoutButton() {
+  function removeToken() {
+    localStorage.removeItem("token");
+    Router.replace("/login");
+  }
+
   return (
-    <NavButton url="/logout" background="#677486">
+    <div
+      className={`${styles.nav_button} ${styles.logout_button}`}
+      onClick={removeToken}
+    >
       Log out
-    </NavButton>
+    </div>
   );
 }
