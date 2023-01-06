@@ -4,11 +4,11 @@ import Layout from "../components/Auth/Layout";
 import LoginForm from "../components/Auth/LoginForm";
 import Banner from "../components/Auth/Banner";
 import { useEffect } from "react";
-import Router from "next/router";
+import { redirectIfAuthenticated } from "../helper/auth";
 
 export default function Login() {
   useEffect(() => {
-    if (localStorage.getItem("token")) Router.replace("/gallery");
+    redirectIfAuthenticated();
   }, []);
 
   return (

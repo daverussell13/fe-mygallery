@@ -1,3 +1,5 @@
+import { getUserID, getUserToken } from "./auth";
+
 const postJsonOpt = (data) => {
   return {
     method: "POST",
@@ -8,25 +10,24 @@ const postJsonOpt = (data) => {
   };
 };
 
-const postJsonWithCreds = (data, token, uid) => {
+const postJsonWithCreds = (data) => {
   return {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "User-ID": uid,
-      Token: token,
+      "User-ID": getUserID(),
+      Token: getUserToken(),
     },
     body: JSON.stringify(data),
   };
 };
 
-const getJsonWithCreds = (token, uid) => {
+const getJsonWithCreds = () => {
   return {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      "User-ID": uid,
-      Token: token,
+      "User-ID": getUserID(),
+      Token: getUserToken(),
     },
   };
 };

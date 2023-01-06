@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { postJsonOpt } from "../../helper/options";
 import { toast } from "react-toastify";
 import Router from "next/router";
 import styles from "./Styles/LoginForm.module.css";
+import { setUserData } from "../../helper/auth";
+import capitalizeSentence from "../../helper/utils";
 
 export default function LoginForm() {
   const [progress, setProgress] = useState(false);
@@ -22,24 +24,21 @@ export default function LoginForm() {
         `${process.env.NEXT_PUBLIC_URL}/login`,
         postJsonOpt(data)
       );
-      const resData = await res.json();
 
-      if (resData?.data) {
+      const resData = await res.json();
+      const success = resData?.data && true;
+
+      if (success) {
         toast.success(`Successfully logged in 👌!`);
         const userData = resData.data;
-
         const userCreds = {
           email: userData.email,
           userID: userData.userID,
         };
-
-        localStorage.setItem("User-Creds", JSON.stringify(userCreds));
-        localStorage.setItem("token", userData.token);
-
+        setUserData(userData.token, userCreds);
         Router.replace("/gallery");
       } else {
-        const message =
-          resData.message[0].toUpperCase() + resData.message.substring(1);
+        const message = capitalizeSentence(resData.message);
         toast.error(`${message} 🤯!`);
       }
     } catch (err) {

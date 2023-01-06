@@ -6,17 +6,22 @@ import { useState } from "react";
 import styles from "../Auth/Styles/LoginForm.module.css";
 import { toast } from "react-toastify";
 import Router from "next/router";
+import { clearUserData, getUserData, getUserToken } from "../../helper/auth";
 
 export default function AddMemoryFormModal({ show, setShow }) {
   const [imageUrl, setImageUrl] = useState("");
   const [fileInput, setFileInput] = useState(null);
   const [progress, setProgress] = useState(false);
 
-  const handleClose = () => {
+  function resetImage() {
     setImageUrl("");
     setFileInput(null);
+  }
+
+  function handleClose() {
+    resetImage();
     setShow(false);
-  };
+  }
 
   function changeImage(event) {
     setFileInput(event.target.files[0]);
@@ -35,15 +40,12 @@ export default function AddMemoryFormModal({ show, setShow }) {
     formData.append("description", target.description.value);
     formData.append("file", fileInput);
 
-    const userID = JSON.parse(localStorage.getItem("User-Creds")).userID;
-    const token = localStorage.getItem("token");
-
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/memories`, {
         method: "POST",
         headers: {
-          "User-ID": userID,
-          Token: token,
+          "User-ID": getUserData()?.userID,
+          Token: getUserToken(),
         },
         body: formData,
       });
@@ -56,8 +58,7 @@ export default function AddMemoryFormModal({ show, setShow }) {
       } else if (status == 403) {
         toast.error("Invalid User Credentials! ⛔");
         toast.info("Relogin required ⚠️");
-        localStorage.removeItem("token");
-        localStorage.removeItem("User-Creds");
+        clearUserData();
         Router.replace("/login");
       } else {
         toast.error(`Something went wrong 🤯!`);
@@ -65,9 +66,7 @@ export default function AddMemoryFormModal({ show, setShow }) {
     } catch (err) {
       toast.error(`Something went wrong 🤯!`);
     } finally {
-      setImageUrl("");
-      setFileInput(null);
-      setProgress(false);
+      handleClose();
       event.target.reset();
     }
   }

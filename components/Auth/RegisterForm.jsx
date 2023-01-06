@@ -3,6 +3,7 @@ import { useState } from "react";
 import { postJsonOpt } from "../../helper/options";
 import { toast } from "react-toastify";
 import styles from "./Styles/LoginForm.module.css";
+import capitalizeSentence from "../../helper/utils";
 
 export default function RegisterForm() {
   const [progress, setProgress] = useState(false);
@@ -28,11 +29,10 @@ export default function RegisterForm() {
       let message = "";
 
       if (success) {
-        message = resData.status[0].toUpperCase() + resData.status.substring(1);
+        message = capitalizeSentence(resData.status);
         toast.success(`${message} 👌!`);
       } else {
-        message =
-          resData.message[0].toUpperCase() + resData.message.substring(1);
+        message = capitalizeSentence(resData.message);
         toast.error(`${message} 🤯!`);
       }
     } catch (err) {

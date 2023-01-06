@@ -4,15 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import Username from "../Nav/UserName";
 import Hamburger from "../Nav/Hamburger";
 import LogoutButton from "../Nav/LogoutButton";
-import Router from "next/router";
+import { clearUserData, getUserData } from "../../helper/auth";
 
-export default function LoggedHeader({ email }) {
+export default function LoggedHeader() {
+  const [email, setEmail] = useState("");
   const navRef = useRef();
 
-  function removeToken() {
-    localStorage.removeItem("token");
-    Router.replace("/login");
-  }
+  useEffect(() => {
+    setEmail(getUserData()?.email);
+  }, []);
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function LoggedHeader({ email }) {
       </header>
       <div className={styles.nav_collapse} ref={navRef}>
         <div>{email}</div>
-        <div style={{ cursor: "pointer" }} onClick={removeToken}>
+        <div style={{ cursor: "pointer" }} onClick={clearUserData}>
           Logout
         </div>
       </div>
