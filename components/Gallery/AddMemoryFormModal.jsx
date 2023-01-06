@@ -3,18 +3,72 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "next/image";
 import { useState } from "react";
+import styles from "../Auth/Styles/LoginForm.module.css";
+import { toast } from "react-toastify";
+import Router from "next/router";
 
 export default function AddMemoryFormModal({ show, setShow }) {
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileInput, setFileInput] = useState(null);
+  const [progress, setProgress] = useState(false);
 
   const handleClose = () => {
-    setImage("");
+    setImageUrl("");
+    setFileInput(null);
     setShow(false);
   };
 
   function changeImage(event) {
+    setFileInput(event.target.files[0]);
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setImageUrl(URL.createObjectURL(event.target.files[0]));
+    }
+  }
+
+  async function addMemory(event) {
+    event.preventDefault();
+    setProgress(true);
+    const target = event.target;
+
+    const formData = new FormData();
+    formData.append("tag", target.tag.value);
+    formData.append("description", target.description.value);
+    formData.append("file", fileInput);
+
+    const userID = JSON.parse(localStorage.getItem("User-Creds")).userID;
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/memories`, {
+        method: "POST",
+        headers: {
+          "User-ID": userID,
+          Token: token,
+        },
+        body: formData,
+      });
+
+      const status = res.status;
+      const resJson = await res.json();
+
+      if (status == 200) {
+        toast.success(resJson.message);
+      } else if (status == 403) {
+        toast.error("Invalid User Credentials! ⛔");
+        toast.info("Relogin required ⚠️");
+        localStorage.removeItem("token");
+        localStorage.removeItem("User-Creds");
+        Router.replace("/login");
+      } else {
+        toast.error(`Something went wrong 🤯!`);
+      }
+    } catch (err) {
+      toast.error(`Something went wrong 🤯!`);
+    } finally {
+      setImageUrl("");
+      setFileInput(null);
+      setProgress(false);
+      event.target.reset();
     }
   }
 
@@ -30,8 +84,8 @@ export default function AddMemoryFormModal({ show, setShow }) {
           <Modal.Title>Add new memory</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form encType="multipart/form-data">
-            {image && (
+          <Form id="add-memo-form" onSubmit={addMemory}>
+            {imageUrl && (
               <Form.Group
                 controlId="exampleForm.ControlInput1"
                 className="mb-2"
@@ -43,24 +97,29 @@ export default function AddMemoryFormModal({ show, setShow }) {
                     height: "100px",
                   }}
                 >
-                  <Image src={image} alt="Unsuported File" fill sizes="cover" />
+                  <Image
+                    src={imageUrl}
+                    alt="Unsuported File"
+                    fill
+                    style={{ objectFit: "contain", background: "#d4d4d4" }}
+                  />
                 </div>
               </Form.Group>
             )}
             <Form.Group controlId="formFile" className="mb-2">
               <Form.Label>Image</Form.Label>
-              <Form.Control type="file" onChange={changeImage} />
+              <Form.Control type="file" onChange={changeImage} name="file" />
             </Form.Group>
             <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
               <Form.Label>Tag</Form.Label>
-              <Form.Control type="tag" placeholder="Tag..." />
+              <Form.Control type="tag" placeholder="Tag..." name="tag" />
             </Form.Group>
             <Form.Group
               className="mb-2"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control as="textarea" rows={3} name="description" />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -68,8 +127,11 @@ export default function AddMemoryFormModal({ show, setShow }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Add</Button>
+          <Button variant="primary" type="submit" form="add-memo-form">
+            Add
+          </Button>
         </Modal.Footer>
+        {progress && <div className={styles.overlay}></div>}
       </Modal>
     </>
   );
