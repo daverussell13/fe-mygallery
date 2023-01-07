@@ -1,7 +1,8 @@
 import styles from "./Styles/GalleryCard.module.css";
 import Image from "next/image";
+import Router from "next/router";
 
-export default function GalleryCard({ key, date, tag, imageUrl }) {
+export default function GalleryCard({ memoryID, date, tag, imageUrl }) {
   const src = `${process.env.NEXT_PUBLIC_STATIC_IMAGE_URL}/${imageUrl}`;
 
   return (
@@ -17,6 +18,7 @@ export default function GalleryCard({ key, date, tag, imageUrl }) {
               objectFit: "contain",
               background: "#f4f4f4",
             }}
+            onClick={() => Router.push(`/gallery/${memoryID}`)}
           ></Image>
         </div>
         <div className={styles.card_body}>

@@ -24,7 +24,11 @@
   background: #263238;
   color: #fff;
   font-weight: 700;
-  cursor: pointer;
+  border: none;
+}
+
+.memory_button:active {
+  background: #000000;
 }
 
 .sort_filter_button {

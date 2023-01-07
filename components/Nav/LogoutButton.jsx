@@ -12,7 +12,7 @@ export default function LogoutButton() {
       className={`${styles.nav_button} ${styles.logout_button}`}
       onClick={removeToken}
     >
-      Log out
+      Logout
     </div>
   );
 }

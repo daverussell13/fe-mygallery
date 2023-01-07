@@ -70,6 +70,7 @@ export default function AddMemoryFormModal({ show, setShow }) {
       toast.error(`Something went wrong 🤯!`);
     } finally {
       handleClose();
+      setProgress(false);
       event.target.reset();
     }
   }
@@ -96,7 +97,7 @@ export default function AddMemoryFormModal({ show, setShow }) {
                   style={{
                     position: "relative",
                     width: "100px",
-                    height: "100px",
+                    height: "80px",
                   }}
                 >
                   <Image

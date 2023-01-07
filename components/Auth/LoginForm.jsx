@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import Router from "next/router";
 import styles from "./Styles/LoginForm.module.css";
 import { setUserData } from "../../helper/auth";
-import capitalizeSentence from "../../helper/utils";
 
 export default function LoginForm() {
   const [progress, setProgress] = useState(false);
@@ -29,7 +28,7 @@ export default function LoginForm() {
       const success = resData?.data && true;
 
       if (success) {
-        toast.success(`Successfully logged in 👌!`);
+        toast.success(`Welcome back 👋!`);
         const userData = resData.data;
         const userCreds = {
           email: userData.email,
@@ -38,8 +37,7 @@ export default function LoginForm() {
         setUserData(userData.token, userCreds);
         Router.replace("/gallery");
       } else {
-        const message = capitalizeSentence(resData.message);
-        toast.error(`${message} 🤯!`);
+        toast.error(`${resData.message} 🤯!`);
       }
     } catch (err) {
       toast.error("Something went wrong...");

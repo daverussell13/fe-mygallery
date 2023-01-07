@@ -6,9 +6,11 @@ import { MemoryContext } from "../../context/MemoryContextProvider";
 import { clearUserData } from "../../helper/auth";
 import { toast } from "react-toastify";
 import Router from "next/router";
+import { getFormattedDate } from "../../helper/utils";
+import Loading from "../Layouts/Loading";
 
 export default function GalleryGridContainer() {
-  const { memories, setMemories, count } = useContext(MemoryContext);
+  const { memories, setMemories } = useContext(MemoryContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -80,17 +82,7 @@ export default function GalleryGridContainer() {
   }, [setMemories]);
 
   if (loading) {
-    return (
-      <div className="album py-5">
-        <div className="container">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-5 gx-5">
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -101,7 +93,8 @@ export default function GalleryGridContainer() {
             return (
               <GalleryCard
                 key={memory.ID}
-                date="2022/15/02"
+                memoryID={memory.ID}
+                date={getFormattedDate(memory.CreatedAt)}
                 tag={memory.tag}
                 imageUrl={memory.imageUrl}
               />

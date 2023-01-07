@@ -4,14 +4,28 @@ import Link from "next/link";
 import Image from "next/image";
 import TagBadge from "./TagBadge";
 import UpdateButton from "./MemoryUpdateButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loading from "../Layouts/Loading";
+import { getJsonWithCreds } from "../../helper/options";
 
-export default function MemoryDetail() {
+export default function MemoryDetail({ id }) {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      Router.replace("/login");
+    async function fetchMemory() {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/memories/${id}`,
+        getJsonWithCreds()
+      );
+      const resJson = await res.json();
+      console.log(resJson);
     }
-  }, []);
+    fetchMemory();
+  }, [id]);
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className={`container my-4 ${styles.container}`}>
