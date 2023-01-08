@@ -10,7 +10,7 @@ export default function Banner() {
           alt="banner"
           fill
           sizes="100%"
-          priority="true"
+          priority
         ></Image>
       </div>
     </div>

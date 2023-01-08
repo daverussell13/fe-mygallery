@@ -10,8 +10,7 @@ export default function GalleryCard({ memoryID, date, tag, imageUrl }) {
           <MemoryImage
             fill
             style={{
-              objectFit: "contain",
-              background: "#f4f4f4",
+              objectFit: "cover",
             }}
             onClick={() => Router.push(`/gallery/${memoryID}`)}
             imageUrl={imageUrl}

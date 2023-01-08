@@ -47,21 +47,17 @@ export default function MemoryDetail({ id }) {
 
   return (
     <div className={`container my-4 ${styles.container}`}>
-      <div className="row justify-content-center">
-        <div className="col-11 col-lg-10 col-xxl-8">
-          <Link className={styles.back_button} href="/gallery">
-            Back
-          </Link>
-        </div>
-      </div>
-      <div className="d-flex">
+      <div className={`row mb-2 px-3 ${styles.detail_header}`}>
+        <Link className={styles.back_button} href="/gallery">
+          Back
+        </Link>
         <div className={styles.memory_title}>
           {getFormattedDate(memory.CreatedAt)},{" "}
           {getFormattedTime(memory.CreatedAt)}
         </div>
       </div>
       <div
-        className="row flex-column justify-content-center align-items-center mb-3 mb-sm-4"
+        className="row flex-column justify-content-center align-items-center mb-3 mb-sm-4 px-4"
         style={{ gap: "20px" }}
       >
         <div className={styles.memory_image_container}>
