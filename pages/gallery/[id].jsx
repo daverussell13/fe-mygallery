@@ -2,20 +2,27 @@ import Header from "../../components/Layouts/LoggedHeader";
 import MemoryDetail from "../../components/Gallery/MemoryDetail";
 import { useEffect, useState } from "react";
 import { redirectIfMissingCreds } from "../../helper/auth";
-import { useRouter } from "next/router";
+import { MemoryContextProvider } from "../../context/MemoryContextProvider";
 
-export default function GalleryDetails() {
-  const router = useRouter();
-  const { id } = router.query;
+export async function getServerSideProps({ params }) {
+  return {
+    props: {
+      id: params.id,
+    },
+  };
+}
 
+export default function GalleryDetails({ id }) {
   useEffect(() => {
     redirectIfMissingCreds();
   }, []);
 
   return (
     <>
-      <Header />
-      <MemoryDetail id={id} />
+      <MemoryContextProvider>
+        <Header />
+        <MemoryDetail id={id} />
+      </MemoryContextProvider>
     </>
   );
 }

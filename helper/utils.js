@@ -1,13 +1,7 @@
-export function capitalize(str, lower = false) {
-  (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, (match) =>
-    match.toUpperCase()
-  );
-}
-
 // For database formatted datetime string
-export function getFormattedDate(str) {
+export function getFormattedDate(dbDateTimeFormatString) {
   let formattedDate = "";
-  const date = new Date(str);
+  const date = new Date(dbDateTimeFormatString);
 
   const d = date.getDate(),
     m = date.getMonth() + 1,
@@ -18,4 +12,14 @@ export function getFormattedDate(str) {
   formattedDate += y;
 
   return formattedDate;
+}
+
+export function getFormattedTime(dbDateTimeFormatString) {
+  const date = new Date(dbDateTimeFormatString);
+
+  const h = date.getHours(),
+    m = date.getMinutes();
+
+  const formattedTime = h + ":" + m;
+  return formattedTime;
 }
