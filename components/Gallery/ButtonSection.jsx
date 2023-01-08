@@ -1,11 +1,14 @@
 import styles from "./Styles/ButtonSection.module.css";
 import AddMemoryFormModal from "./AddMemoryFormModal";
+import SortFilterModal from "./SortFilterModal";
 import { useState } from "react";
 
 export default function ButtonSection() {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showSortFilterModal, setShowSortFilterModal] = useState(false);
 
   const handleNewMemoryButton = () => setShowAddModal(true);
+  const handleNewSortFilterButton = () => setShowSortFilterModal(true);
 
   return (
     <div className="container" style={{ marginTop: "80px" }}>
@@ -23,7 +26,16 @@ export default function ButtonSection() {
           </div>
         </div>
         <div className="col-md-8 px-lg-5 px-sm-5 px-md-3 d-sm-block d-flex justify-content-center">
-          <div className={styles.sort_filter_button}>Sort and Filter</div>
+          <button
+            className={styles.sort_filter_button}
+            onClick={handleNewSortFilterButton}
+          >
+            Sort and Filter
+          </button>
+          <SortFilterModal
+            show={showSortFilterModal}
+            setShow={setShowSortFilterModal}
+          />
         </div>
       </div>
     </div>

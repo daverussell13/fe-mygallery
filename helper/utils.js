@@ -16,10 +16,5 @@ export function getFormattedDate(dbDateTimeFormatString) {
 
 export function getFormattedTime(dbDateTimeFormatString) {
   const date = new Date(dbDateTimeFormatString);
-
-  const h = date.getHours(),
-    m = date.getMinutes();
-
-  const formattedTime = h + ":" + m;
-  return formattedTime;
+  return date.toLocaleTimeString("en-US");
 }
