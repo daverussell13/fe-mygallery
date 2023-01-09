@@ -6,22 +6,29 @@ import TagBadge from "./TagBadge";
 import UpdateButton from "./MemoryUpdateButton";
 import { useContext, useEffect, useState } from "react";
 import Loading from "../Layouts/Loading";
-import { getJsonWithCreds } from "../../helper/options";
+import { requestWithCreds } from "../../helper/options";
 import { MemoryContext } from "../../context/MemoryContextProvider";
 import { toast } from "react-toastify";
 import Router from "next/router";
 import { getFormattedDate, getFormattedTime } from "../../helper/utils";
+import EditMemoryForm from "./EditMemoryFormModal";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 export default function MemoryDetail({ id }) {
   const [loading, setLoading] = useState(true);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeletModal, setShowDeleteModal] = useState(false);
   const { memory, setMemory } = useContext(MemoryContext);
+
+  const handleShowEditModal = () => setShowEditModal(true);
+  const handleShowDeleteModal = () => setShowDeleteModal(true);
 
   useEffect(() => {
     async function fetchMemory() {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/memories/${id}`,
-          getJsonWithCreds()
+          requestWithCreds()
         );
         const resJson = await res.json();
         const success = res.status == 200;
@@ -41,7 +48,7 @@ export default function MemoryDetail({ id }) {
     fetchMemory();
   }, [id, setMemory]);
 
-  if (loading) {
+  if (loading || !memory) {
     return <Loading></Loading>;
   }
 
@@ -78,8 +85,20 @@ export default function MemoryDetail({ id }) {
         </div>
       </div>
       <div className={`row justify-content-center ${styles.detail_footer}`}>
-        <UpdateButton action="Edit"></UpdateButton>
-        <UpdateButton action="Delete" background="#E39982"></UpdateButton>
+        <UpdateButton
+          action="Edit"
+          handler={handleShowEditModal}
+        ></UpdateButton>
+        <EditMemoryForm show={showEditModal} setShow={setShowEditModal} />
+        <UpdateButton
+          action="Delete"
+          background="#E39982"
+          handler={handleShowDeleteModal}
+        ></UpdateButton>
+        <DeleteConfirmation
+          show={showDeletModal}
+          setShow={setShowDeleteModal}
+        />
       </div>
     </div>
   );

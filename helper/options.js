@@ -10,9 +10,9 @@ const postJsonOpt = (data) => {
   };
 };
 
-const postJsonWithCreds = (data) => {
+const postJsonWithCreds = (data, method = "POST") => {
   return {
-    method: "POST",
+    method: method,
     headers: {
       "Content-Type": "application/json",
       "User-ID": getUserID(),
@@ -22,9 +22,9 @@ const postJsonWithCreds = (data) => {
   };
 };
 
-const getJsonWithCreds = () => {
+const requestWithCreds = (method = "GET") => {
   return {
-    method: "GET",
+    method: method,
     headers: {
       "User-ID": getUserID(),
       Token: getUserToken(),
@@ -32,4 +32,4 @@ const getJsonWithCreds = () => {
   };
 };
 
-export { postJsonOpt, postJsonWithCreds, getJsonWithCreds };
+export { postJsonOpt, postJsonWithCreds, requestWithCreds };
