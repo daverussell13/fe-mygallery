@@ -118,3 +118,7 @@ a {
     --header-height: 68px;
   }
 }
+
+a:hover {
+  color: #000;
+}

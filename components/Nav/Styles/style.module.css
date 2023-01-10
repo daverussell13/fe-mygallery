@@ -7,6 +7,14 @@
   cursor: pointer;
 }
 
+.register_btn {
+  background-color: #677486;
+}
+
+.login_btn {
+  background-color: #82aae3;
+}
+
 .logout_button {
   background-color: #677486;
 }

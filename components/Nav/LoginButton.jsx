@@ -1,9 +1,10 @@
-import NavButton from "./NavButton";
+import styles from "./Styles/style.module.css";
+import Link from "next/link";
 
 export default function LoginButton() {
   return (
-    <NavButton url="/login" background="#82aae3">
-      Login
-    </NavButton>
+    <Link href="/login" className={`${styles.login_btn} ${styles.nav_button}`}>
+      Register
+    </Link>
   );
 }

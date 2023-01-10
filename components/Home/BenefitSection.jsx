@@ -3,7 +3,7 @@ import BenefitCard from "./BenefitCard";
 
 export default function BenefitSection() {
   return (
-    <section>
+    <section className="py-5">
       <div className="container">
         <div className="row mb-5">
           <div className={`col d-flex flex-column ${styles.heading}`}>
