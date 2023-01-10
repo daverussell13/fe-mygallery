@@ -26,7 +26,6 @@ export default function GalleryGridContainer() {
         if (status == 200) {
           setMemories(resJson.data);
         } else if (status >= 400 && status <= 499) {
-          toast.error("Unable to fetch memories 💀");
           toast.info("Please relogin ⚠️");
           clearUserData();
           Router.replace("/login");

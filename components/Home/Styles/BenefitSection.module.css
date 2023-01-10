@@ -1,0 +1,40 @@
+.heading {
+  color: black;
+}
+
+.heading_title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #82aae3;
+}
+
+.heading_subtitle {
+  font-weight: 600;
+  font-size: 2em;
+  color: #000000;
+}
+
+/* Card */
+.card_container {
+}
+
+.card {
+  gap: 1.5em;
+  background: #ffffff;
+  box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);
+  border-radius: 7px;
+}
+
+.card_title {
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 150%;
+  color: #000000;
+}
+
+.card_description {
+  font-weight: 400;
+  font-size: 1.05em;
+  line-height: 150%;
+  color: #000000;
+}
