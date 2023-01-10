@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className={`${styles.hero} pb-5 pt-md-3 pt-lg-0 pt-4`}>
+    <section className={`${styles.hero} py-5 py-md-4`}>
       <div className="container px-5">
         <div className="row px-lg-5">
           <div className="col-md-6 d-flex justify-content-center align-items-center order-2 order-md-1">

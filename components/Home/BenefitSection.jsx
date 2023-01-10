@@ -5,22 +5,21 @@ export default function BenefitSection() {
   return (
     <section className="py-5">
       <div className="container">
-        <div className="row mb-5">
-          <div className={`col d-flex flex-column ${styles.heading}`}>
+        <div className="row mb-3">
+          <div className={`col d-flex flex-column ${styles.heading} px-5`}>
             <div className={styles.heading_title}>Our Benefits</div>
             <div className={styles.heading_subtitle}>
               Why you should join us ?
             </div>
           </div>
         </div>
-        <div className="row row-cols-3">
+        <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 px-4 px-sm-0">
           <BenefitCard
             title="Penghasilan Tambahan"
             description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do Amet minim mollit non Amet minim mollit non deserunt ullamco est sit aliqua"
           >
             <svg
-              width="70"
-              height="70"
+              className={styles.card_icon_svg}
               viewBox="0 0 70 70"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -40,8 +39,7 @@ export default function BenefitSection() {
             description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do Amet minim mollit non Amet minim mollit non deserunt ullamco est sit aliqua"
           >
             <svg
-              width="70"
-              height="70"
+              className={styles.card_icon_svg}
               viewBox="0 0 70 70"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -61,8 +59,7 @@ export default function BenefitSection() {
             description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do Amet minim mollit non Amet minim mollit non deserunt ullamco est sit aliqua"
           >
             <svg
-              width="70"
-              height="70"
+              className={styles.card_icon_svg}
               viewBox="0 0 70 70"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +79,7 @@ export default function BenefitSection() {
             description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do Amet minim mollit non Amet minim mollit non deserunt ullamco est sit aliqua"
           >
             <svg
-              width="70"
-              height="70"
+              className={styles.card_icon_svg}
               viewBox="0 0 70 70"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +99,7 @@ export default function BenefitSection() {
             description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do Amet minim mollit non Amet minim mollit non deserunt ullamco est sit aliqua"
           >
             <svg
-              width="70"
-              height="70"
+              className={styles.card_icon_svg}
               viewBox="0 0 70 70"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

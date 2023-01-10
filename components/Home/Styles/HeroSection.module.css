@@ -1,6 +1,7 @@
 /* Hero section */
 .hero {
   background: #eafdfc;
+  padding-bottom: 50px !important;
 }
 
 .hero_title {
@@ -73,8 +74,8 @@
     font-size: 12px;
   }
   .image_container {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
   }
 }
 
@@ -90,7 +91,7 @@
 
 @media screen and (max-width: 360px) {
   .hero {
-    font-size: 8px;
+    font-size: 9px;
   }
   .image_container {
     width: 250px;
