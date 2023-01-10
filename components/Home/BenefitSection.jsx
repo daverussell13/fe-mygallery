@@ -5,7 +5,7 @@ export default function BenefitSection() {
   return (
     <section>
       <div className="container">
-        <div className="row mb-3">
+        <div className="row mb-5">
           <div className={`col d-flex flex-column ${styles.heading}`}>
             <div className={styles.heading_title}>Our Benefits</div>
             <div className={styles.heading_subtitle}>
