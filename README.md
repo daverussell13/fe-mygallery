@@ -1,4 +1,4 @@
 # Cara jalanin :
-- Buat file example.local
+- Buat file env.local
 - Masukin endpoint (base url, static file url)
 - npm run dev
