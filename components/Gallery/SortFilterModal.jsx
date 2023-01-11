@@ -15,7 +15,7 @@ export default function SortFilterModal({ show, setShow }) {
   const [progress, setProgress] = useState(false);
   const formRef = useRef(null);
 
-  const { memories, setMemories } = useContext(MemoryContext);
+  const { setSorted, setMemories } = useContext(MemoryContext);
 
   function resetState() {
     setSortNone(true);
@@ -64,7 +64,8 @@ export default function SortFilterModal({ show, setShow }) {
     const filterBy = target.filterBy.value;
 
     if (isFilterNone && isSortNone) {
-      handleClose();
+      setSorted(false);
+      progressDone();
       return;
     }
 
@@ -93,6 +94,7 @@ export default function SortFilterModal({ show, setShow }) {
 
       if (success) {
         setMemories(resJson.data);
+        setSorted(true);
         toast.success("Sort & Filter succesfully applied 👌");
       } else {
         toast.error(`Something went wrong 🤯!`);

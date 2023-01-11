@@ -9,10 +9,11 @@ import Loading from "../Layouts/Loading";
 import { requestWithCreds } from "../../helper/options";
 
 export default function GalleryGridContainer() {
-  const { memories, setMemories } = useContext(MemoryContext);
+  const { memories, setMemories, isSorted } = useContext(MemoryContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     async function fetchMemories() {
       try {
         const res = await fetch(
@@ -42,8 +43,12 @@ export default function GalleryGridContainer() {
         setLoading(false);
       }
     }
-    if (!memories) fetchMemories();
-  }, [memories, setMemories]);
+    if (!isSorted) {
+      fetchMemories();
+    } else {
+      setLoading(false);
+    }
+  }, [isSorted, setMemories]);
 
   if (loading) {
     return <Loading />;

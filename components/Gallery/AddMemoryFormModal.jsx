@@ -11,7 +11,8 @@ import { clearUserData, getUserData, getUserToken } from "../../helper/auth";
 import { MemoryContext } from "../../context/MemoryContextProvider";
 
 export default function AddMemoryFormModal({ show, setShow }) {
-  const { memories, setMemories } = useContext(MemoryContext);
+  const { memories, setMemories, isSorted, setSorted } =
+    useContext(MemoryContext);
   const [imageUrl, setImageUrl] = useState("");
   const [fileInput, setFileInput] = useState(null);
   const [progress, setProgress] = useState(false);
@@ -75,7 +76,11 @@ export default function AddMemoryFormModal({ show, setShow }) {
       const resJson = await res.json();
 
       if (status == 200) {
-        setMemories([...memories, resJson.data]);
+        if (isSorted) {
+          setSorted(false);
+        } else {
+          setMemories([...memories, resJson.data]);
+        }
         toast.success(resJson.message);
       } else if (status == 403) {
         invalidUser();
