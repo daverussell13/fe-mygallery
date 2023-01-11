@@ -15,8 +15,12 @@
   background-color: #82aae3;
 }
 
-.logout_button {
-  background-color: #677486;
+.register_btn:active {
+  background-color: #3c434e;
+}
+
+.login_btn:active {
+  background-color: #5d7aa2;
 }
 
 .logout_button:active {

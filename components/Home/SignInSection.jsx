@@ -13,8 +13,7 @@ export default function SignInSection() {
             Are you ready to use <br /> this application?
           </div>
           <div className={styles.description}>
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do Amet
-            minim mollit non
+            Amet minim mollit non deserunt ullamco est sit aliqua dolor do
           </div>
           <Link className={styles.button} href="/login">
             Let&apos;s Sign In!

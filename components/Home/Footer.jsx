@@ -2,12 +2,9 @@ import styles from "./Styles/Footer.module.css";
 
 export default function Footer() {
   return (
-    <footer
-      className="text-center text-lg-start"
-      style={{ backgroundColor: "#EAFDFC", color: "#000" }}
-    >
+    <footer className={`text-center text-lg-start ${styles.section}`}>
       <div className="container p-4 pb-0">
-        <section className>
+        <section>
           <div className="row mb-5">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
               <h6 className={`mb-4 ${styles.logo}`}>
@@ -17,7 +14,7 @@ export default function Footer() {
               </h6>
             </div>
             <hr className="w-100 clearfix d-md-none" />
-            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
               <h6 className={`mb-4 ${styles.col_header}`}>Lorem Ipsum</h6>
               <p>
                 <a className={styles.col_text}>Lorem</a>
@@ -43,7 +40,7 @@ export default function Footer() {
               </p>
             </div>
             <hr className="w-100 clearfix d-md-none" />
-            <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
               <h6 className={`mb-4 ${styles.col_header}`}>Lorem Ipsum</h6>
               <p>
                 <a className={styles.col_text}>Lorem</a>
