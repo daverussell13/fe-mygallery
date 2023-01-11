@@ -50,7 +50,7 @@ export default function GalleryGridContainer() {
     }
   }, [isSorted, setMemories]);
 
-  if (loading) {
+  if (loading || memories == null) {
     return <Loading />;
   }
 

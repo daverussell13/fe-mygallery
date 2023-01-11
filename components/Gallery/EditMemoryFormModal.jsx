@@ -2,14 +2,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "next/image";
-import { useContext, useRef, useState } from "react";
+import { memo, useContext, useRef, useState } from "react";
 import styles from "../Auth/Styles/LoginForm.module.css";
 import { toast } from "react-toastify";
 import Router from "next/router";
 import Spinner from "react-bootstrap/Spinner";
-import { clearUserData } from "../../helper/auth";
 import { MemoryContext } from "../../context/MemoryContextProvider";
-import Loading from "../Layouts/Loading";
+import { postFormDataWithCreds } from "../../helper/options";
 
 export default function EditMemoryForm({ show, setShow }) {
   const { memory, setMemory } = useContext(MemoryContext);
@@ -46,13 +45,6 @@ export default function EditMemoryForm({ show, setShow }) {
     }
   }
 
-  function invalidUser() {
-    toast.error("Invalid User Credentials! ⛔");
-    toast.info("Relogin required ⚠️");
-    clearUserData();
-    Router.replace("/login");
-  }
-
   async function editMemory(event) {
     event.preventDefault();
     setProgress(true);
@@ -63,23 +55,46 @@ export default function EditMemoryForm({ show, setShow }) {
 
     const formData = new FormData();
 
+    let changed = false;
+
     if (newTag != memory.tag) {
       formData.append("tag", target.tag.value);
+      changed = true;
     }
 
     if (newDescription != memory.description) {
       formData.append("description", target.description.value);
+      changed = true;
     }
 
     if (fileInput) {
       formData.append("file", fileInput);
+      changed = true;
     }
 
-    formData.forEach((e) => {
-      console.log(e);
-    });
+    if (!changed) {
+      progressDone();
+      return;
+    }
 
-    setProgress(false);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/memories/${memory.ID}`,
+        postFormDataWithCreds(formData, "PUT")
+      );
+
+      const success = res.status == 200;
+
+      if (success) {
+        Router.reload(window.location.pathname);
+      } else {
+        toast.error(`Unable to update... 🤯!`);
+      }
+    } catch (err) {
+      toast.error(`Something went wrong... 🤯!`);
+    } finally {
+      progressDone();
+    }
   }
 
   return (

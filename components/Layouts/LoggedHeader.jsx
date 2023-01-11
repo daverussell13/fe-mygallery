@@ -7,11 +7,11 @@ import LogoutButton from "../Nav/LogoutButton";
 import { clearUserData, getUserData } from "../../helper/auth";
 
 export default function LoggedHeader() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const navRef = useRef();
 
   useEffect(() => {
-    setEmail(getUserData()?.email);
+    setUsername(getUserData()?.fullname);
   }, []);
 
   return (
@@ -20,14 +20,14 @@ export default function LoggedHeader() {
         <div className={styles.wrapper}>
           <div className={styles.logo}>MyGallery.</div>
           <div className={styles.nav_container}>
-            <Username name={email} />
+            <Username name={username} />
             <LogoutButton />
           </div>
           <Hamburger navRef={navRef} />
         </div>
       </header>
       <div className={styles.nav_collapse} ref={navRef}>
-        <div>{email}</div>
+        <div>{username}</div>
         <div style={{ cursor: "pointer" }} onClick={clearUserData}>
           Logout
         </div>

@@ -1,4 +1,4 @@
-import { getUserID, getUserToken } from "./auth";
+import { getUserID, getUserToken, getUserData } from "./auth";
 
 const postJsonOpt = (data) => {
   return {
@@ -22,6 +22,17 @@ const postJsonWithCreds = (data, method = "POST") => {
   };
 };
 
+const postFormDataWithCreds = (formData, method = "POST") => {
+  return {
+    method: method,
+    headers: {
+      "User-ID": getUserData()?.userID,
+      Token: getUserToken(),
+    },
+    body: formData,
+  };
+};
+
 const requestWithCreds = (method = "GET") => {
   return {
     method: method,
@@ -32,4 +43,9 @@ const requestWithCreds = (method = "GET") => {
   };
 };
 
-export { postJsonOpt, postJsonWithCreds, requestWithCreds };
+export {
+  postJsonOpt,
+  postJsonWithCreds,
+  requestWithCreds,
+  postFormDataWithCreds,
+};

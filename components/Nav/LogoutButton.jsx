@@ -9,7 +9,7 @@ export default function LogoutButton() {
 
   return (
     <div
-      className={`${styles.nav_button} ${styles.logout_button}`}
+      className={`${styles.nav_button} ${styles.logout_btn}`}
       onClick={removeToken}
     >
       Logout

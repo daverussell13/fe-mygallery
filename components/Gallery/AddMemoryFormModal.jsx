@@ -9,6 +9,7 @@ import Router from "next/router";
 import Spinner from "react-bootstrap/Spinner";
 import { clearUserData, getUserData, getUserToken } from "../../helper/auth";
 import { MemoryContext } from "../../context/MemoryContextProvider";
+import { postFormDataWithCreds } from "../../helper/options";
 
 export default function AddMemoryFormModal({ show, setShow }) {
   const { memories, setMemories, isSorted, setSorted } =
@@ -63,14 +64,10 @@ export default function AddMemoryFormModal({ show, setShow }) {
     formData.append("file", fileInput);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/memories`, {
-        method: "POST",
-        headers: {
-          "User-ID": getUserData()?.userID,
-          Token: getUserToken(),
-        },
-        body: formData,
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/memories`,
+        postFormDataWithCreds(formData)
+      );
 
       const status = res.status;
       const resJson = await res.json();

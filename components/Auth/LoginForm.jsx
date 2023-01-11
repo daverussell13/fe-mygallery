@@ -33,6 +33,7 @@ export default function LoginForm() {
         const userCreds = {
           email: userData.email,
           userID: userData.userID,
+          fullname: userData.fullName,
         };
         setUserData(userData.token, userCreds);
         Router.replace("/gallery");

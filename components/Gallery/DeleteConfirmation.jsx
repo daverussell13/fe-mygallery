@@ -8,7 +8,7 @@ import Router from "next/router";
 
 export default function DeleteConfirmation({ show, setShow }) {
   const handleClose = () => setShow(false);
-  const { memory, setMemory, setMemories } = useContext(MemoryContext);
+  const { memory, setMemory } = useContext(MemoryContext);
 
   async function confirmHandler() {
     const res = await fetch(
